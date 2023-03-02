@@ -7,7 +7,8 @@ const port  = 3001
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-app.use(morgan('tiny'));
+morgan.token('body', (req, res) => JSON.stringify(req.body));
+app.use(morgan(':method :url :status :response-time ms :body'));
 
 let persons = [
   { id: 1, name: 'Arto hellas', number: '040-123456' },
