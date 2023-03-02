@@ -1,12 +1,13 @@
-const { request } = require('express')
-const express = require('express')
-const app = express()
+const { request } = require('express');
+const express = require('express');
+const morgan = require('morgan');
+const app = express();
 const port  = 3001
 
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-
+app.use(morgan('tiny'));
 
 let persons = [
   { id: 1, name: 'Arto hellas', number: '040-123456' },
