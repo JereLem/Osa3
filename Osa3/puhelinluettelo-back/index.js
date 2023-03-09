@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 
 app.use(bodyParser.json());
-app.use(express.static('../puhelinluettelo-front/puhelinluettelo/build'))
+app.use(express.static('build'))
 morgan.token('body', (req, res) => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :response-time ms :body'));
 app.use(cors());
