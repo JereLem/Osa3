@@ -1,15 +1,16 @@
-const { request } = require('express');
+const { req } = require('express');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001
-
 const bodyParser = require('body-parser');
 
 
 app.use(bodyParser.json());
-app.use(express.static('build'))
+
+app.use(express.static('../puhelinluettelo-front/puhelinluettelo/build'))
+
 morgan.token('body', (req, res) => JSON.stringify(req.body));
 app.use(morgan(':method :url :status :response-time ms :body'));
 app.use(cors());
