@@ -1,4 +1,5 @@
-const { req } = require('express');
+require('dotenv').config()
+
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -49,26 +50,26 @@ app.get('/api/info', (req, res) => {
 })
 
 app.post('/api/persons', (req, res) => {
-  const body = req.body;
-  
+  const body = request.body
+  console.log(body.name)
   if (!body.name || !body.number) {
-    return res.status(400).json({ error: 'Name or number missing' });
+      return response.status(400).json({
+          error: 'The name or number is missing'
+        })
+  } else if (Person.find({ name: body.name })) {
+      return response.status(400).json({
+          error: 'Name must be unique'
+        })
   }
-  
-  const nameExists = persons.some(person => person.name === body.name);
-  if (nameExists) {
-    return res.status(400).json({ error: 'Name already exists in the phonebook' });
-  }
-  
-  const person = {
-    id: Math.floor(Math.random() * 1000000),
+  const person =  new Person({
+    //id: Math.floor(Math.random() * 1000000),
     name: body.name,
     number: body.number
-  };
+  });
   
-  persons.push(person);
-  
-  res.json(person);
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
 });
 
 app.delete('/api/persons/:id', (req, res) => {
