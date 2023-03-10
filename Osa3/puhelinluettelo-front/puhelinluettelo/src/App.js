@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import SearchFilter from './components/SearchFilter'
 import PersonForm from './components/PersonForm'
 import axios from 'axios'
+const baseUrl = 'api/persons';
 
 const App = () => {
 const [persons, setPersons] = useState([{ name: '', number: '' }])
@@ -10,7 +11,7 @@ const [newPhone, setNewPhone] = useState('')
 const [searchQuery, setSearchQuery] = useState('')
 
 const hook = () => {
-  axios.get('api/persons')
+  axios.get(baseUrl)
   .then(response => {
   setPersons(response.data)
 });
