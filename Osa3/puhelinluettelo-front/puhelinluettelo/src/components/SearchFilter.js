@@ -1,13 +1,16 @@
-const SearchFilter = (props) => {
-  return (
+import React from 'react';
+
+const SearchFilter = ({ filter, handleFilter }) => (
   <div>
-  <form>
-  <div>
-  Search:{" "}
-  <input value={props.searchQuery} onChange={(event) => props.setSearchQuery(event.target.value)} />
+    <form>
+      <div>
+        Search: <input 
+          value={filter} 
+          onChange={handleFilter}
+        />
+      </div>
+    </form>
   </div>
-  </form>
-  </div>
-  )
-  }
-export default SearchFilter
+)
+
+export default SearchFilter;
